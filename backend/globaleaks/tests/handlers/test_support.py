@@ -15,7 +15,7 @@ class TestSupportHandler(helpers.TestHandlerWithPopulatedDB):
         result = support.generate_support_email(mail_address, hostname, request_text)
 
         expected = (
-            "From: user[.]name[@]example[.]com\n\n"
+            "From: user.name@example.com\n\n"
             "Site: globaleaks.org\n\n"
             "Request:\nVisit http[://]example[.]com and contact user[.]name[@]example[.]com"
         )
