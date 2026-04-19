@@ -5,8 +5,8 @@ from globaleaks.utils.log import log
 from globaleaks.utils.defang import defang
 
 def generate_support_email(mail_address, hostname, request):
-    email = "From: %s\n\n" % defang(mail_address) # untrusted
-    email += "Site: %s\n\n" % hostname            # trusted
+    email = "From: %s\n\n" % mail_address         # regexp-validated
+    email += "Site: %s\n\n" % hostname            # serverside-generated
     email += "Request:\n%s" % defang(request)     # untrusted
     return email
 
