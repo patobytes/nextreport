@@ -25,15 +25,6 @@ body:
       required: true
 
   - type: textarea
-    id: current-situation
-    attributes:
-      label: Current situation
-      description: |
-        What are the limitations or pain points with the current implementation?
-    validations:
-      required: true
-
-  - type: textarea
     id: proposal
     attributes:
       label: Proposal
