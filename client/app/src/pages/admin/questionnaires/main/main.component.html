@@ -8,7 +8,7 @@
       </button>
       <span class="custom-file">
         <input id="import-questionnaire-file" type="file" hidden #keyUploadInput (change)="importQuestionnaire(keyUploadInput.files)" />
-        <label for="import-questionnaire-file" id="keyUpload" (click)="keyUploadInput.click()" class="btn btn-sm btn-outline-secondary">
+        <label for="import-questionnaire-file" id="keyUpload" class="btn btn-sm btn-outline-secondary">
           <i class="fas fa-upload"></i>{{'Import' | translate}}
         </label>
       </span>
@@ -38,7 +38,7 @@
     <app-paginated-interface [items]="questionnairesData" [filterField]="'name'" [orderBy]="'name'">
       <ng-template #content let-item="item" let-index="index">
         <form id="questionnaire-{{index}}" class="config-item" #editQuestionnaire="ngForm" novalidate>
-          <src-questionnaires-list [questionnaire]="item" [editQuestionnaire]="editQuestionnaire" [questionnaires]="questionnairesData" (deleted)="onDelete($event)"></src-questionnaires-list>
+          <src-questionnaires-list [questionnaire]="item" [editQuestionnaire]="editQuestionnaire" [questionnaires]="questionnairesData" (duplicated)="getResolver()" (deleted)="onDelete($event)"></src-questionnaires-list>
         </form>
       </ng-template>
     </app-paginated-interface>

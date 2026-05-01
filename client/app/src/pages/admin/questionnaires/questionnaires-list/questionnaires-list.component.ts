@@ -51,6 +51,9 @@ export class QuestionnairesListComponent {
     const modalRef = this.modalService.open(QuestionnaireDuplicationComponent, {backdrop: 'static', keyboard: false});
     modalRef.componentInstance.questionnaire = questionnaire;
     modalRef.componentInstance.operation = "duplicate";
+    modalRef.componentInstance.confirmFunction = () => {
+        this.utilsService.reloadComponent();
+    }
     return modalRef.result;
   }
 
