@@ -463,12 +463,6 @@ The overwrite routine is executed by a periodic scheduler and follows these step
 * A second overwrite writes 1 across the entire file;
 * A third overwrite writes random bytes across the entire file.
 
-Exception logging and redaction
--------------------------------
-To quickly diagnose potential software issues when client exceptions occur, they are automatically reported to the backend. The backend temporarily caches these exceptions and sends them to the backend administrator via email.
-
-To prevent inadvertent information leaks, logs are processed through filters that redact email addresses and UUIDs.
-
 Entropy sources
 ---------------
 The primary source of entropy for the platform is `/dev/urandom`.
