@@ -1,0 +1,36 @@
+name: Build and Deploy NextReport
+
+on:
+  push:
+    branches:
+      - main # Triggers when you push to the stable branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4 
+
+      - name: Log in to Azure Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.REGISTRY_URL }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }} 
+
+      - name: Build and Push Container Image
+        run: |
+          docker build -t ${{ secrets.REGISTRY_URL }}/nextreport:latest -f docker/Dockerfile . 
+          docker push ${{ secrets.REGISTRY_URL }}/nextreport:latest 
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'nextreport-portal' # Replace with your Azure Web App name [5]
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }} 
+          images: '${{ secrets.REGISTRY_URL }}/nextreport:latest' 
